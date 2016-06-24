@@ -14,6 +14,8 @@ import NewEntry from './NewEntry';
 
 import './style.css';
 
+import configureStore from './configureStore';
+
 // Globally register gql template literal tag
 registerGqlTag();
 
@@ -31,8 +33,10 @@ const client = new ApolloClient({
   shouldBatch: true,
 });
 
+const store = configureStore({}, client);
+
 render((
-  <ApolloProvider client={client}>
+  <ApolloProvider client={client} store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Layout}>
         <IndexRoute component={Feed} />

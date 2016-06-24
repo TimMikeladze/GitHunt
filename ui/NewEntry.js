@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-apollo';
 import { browserHistory } from 'react-router';
+import { Form, wrap } from 'ya-react-redux-form';
+import { ApolloForm } from 'ya-react-apollo-form';
+
+const Input = (props) => wrap(<input {...props} />);
 
 const NewEntry = ({ mutations, submitRepository }) => {
   function handleSubmit(event) {
@@ -18,13 +22,13 @@ const NewEntry = ({ mutations, submitRepository }) => {
     <div>
       <h1>Submit a repository</h1>
 
-      <form onSubmit={handleSubmit}>
+      <ApolloForm name="submitRepository" mutation={mutations.submitRepository}>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">
             Repository name
           </label>
 
-          <input
+          <Input
             type="text"
             className="form-control"
             id="exampleInputEmail1"
@@ -43,7 +47,7 @@ const NewEntry = ({ mutations, submitRepository }) => {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
-      </form>
+      </ApolloForm>
     </div>
   );
 };
