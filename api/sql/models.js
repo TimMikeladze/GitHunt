@@ -132,7 +132,9 @@ export class Entries {
                 created_at: Date.now(),
                 updated_at: Date.now(),
                 repository_name: repoFullName,
-                posted_by: username
+                posted_by: username,
+              }).catch(err => {
+                throw new Error('Insert failed');
               });
           }
         });

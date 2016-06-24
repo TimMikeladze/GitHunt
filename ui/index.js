@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import ApolloClient, { createNetworkInterface, addTypename } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import { registerGqlTag } from 'apollo-client/gql';
-
+import { YaFormConfig } from 'ya-react-form';
 // Polyfill fetch
 import 'whatwg-fetch';
 
@@ -13,6 +13,8 @@ import Layout from './Layout';
 import NewEntry from './NewEntry';
 
 import './style.css';
+
+import configureStore from './configureStore';
 
 // Globally register gql template literal tag
 registerGqlTag();
@@ -31,8 +33,11 @@ const client = new ApolloClient({
   shouldBatch: true,
 });
 
+const store = configureStore({}, client);
+YaFormConfig.setStore(store);
+
 render((
-  <ApolloProvider client={client}>
+  <ApolloProvider client={client} store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Layout}>
         <IndexRoute component={Feed} />

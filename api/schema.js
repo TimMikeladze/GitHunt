@@ -77,10 +77,10 @@ const rootResolvers = {
           return context.Entries.submitRepository(
             repoFullName,
             context.user.login
-          )
+          );
         })
         .then(() => {
-          return context.Entries.getByRepoFullName(repoFullName)
+          return context.Entries.getByRepoFullName(repoFullName);
         });
     },
 

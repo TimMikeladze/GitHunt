@@ -44,6 +44,9 @@
     "html-webpack-plugin": "^2.17.0",
     "mocha": "^2.4.5",
     "nodemon": "^1.9.2",
+    "path": "^0.12.7",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.1.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1"
@@ -71,8 +74,10 @@
     "react-router": "^2.4.1",
     "react-timeago": "^3.0.0",
     "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
     "request-promise": "^3.0.0",
     "sqlite3": "^3.1.4",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^1.0.0",
+    "ya-react-form": "0.0.1"
   }
 }
