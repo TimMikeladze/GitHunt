@@ -12,6 +12,11 @@ const InfoLabel = ({ label, value }) => (
   <span className="label label-info">{label}: {value}</span>
 );
 
+InfoLabel.propTypes = {
+  label: React.PropTypes.string,
+  value: React.PropTypes.number,
+};
+
 const VoteButtons = ({ canVote, score, onVote, vote }) => {
   const buttonClasses = classNames('btn', 'btn-score', { invisible: ! canVote });
 
@@ -40,6 +45,13 @@ const VoteButtons = ({ canVote, score, onVote, vote }) => {
   );
 };
 
+VoteButtons.propTypes = {
+  canVote: React.PropTypes.bool,
+  score: React.PropTypes.number,
+  onVote: React.PropTypes.func.isRequired,
+  vote: React.PropTypes.object.isRequired,
+};
+
 const FeedEntry = ({ entry, currentUser, onVote }) => (
   <div className="media">
     <div className="media-vote">
@@ -57,6 +69,7 @@ const FeedEntry = ({ entry, currentUser, onVote }) => (
           className="media-object"
           style={{ width: '64px', height: '64px' }}
           src={entry.repository.owner.avatar_url}
+          alt={`${entry.repository.owner.login}'s avatar`}
         />
       </a>
     </div>
@@ -80,6 +93,12 @@ const FeedEntry = ({ entry, currentUser, onVote }) => (
   </div>
 );
 
+FeedEntry.propTypes = {
+  entry: React.PropTypes.object.isRequired,
+  currentUser: React.PropTypes.object,
+  onVote: React.PropTypes.func.isRequired,
+};
+
 const FeedContent = ({ entries, currentUser, onVote }) => (
   <div> {
     entries.map((entry) => (
@@ -93,6 +112,12 @@ const FeedContent = ({ entries, currentUser, onVote }) => (
   } </div>
 );
 
+FeedContent.propTypes = {
+  entries: React.PropTypes.array.isRequired,
+  currentUser: React.PropTypes.object,
+  onVote: React.PropTypes.func.isRequired,
+};
+
 const Feed = ({ data, mutations }) => {
   if (data.loading) {
     return <Loading />;
@@ -104,6 +129,11 @@ const Feed = ({ data, mutations }) => {
       onVote={(...args) => mutations.vote(...args)}
     />
   );
+};
+
+Feed.propTypes = {
+  data: React.PropTypes.object.isRequired,
+  mutations: React.PropTypes.object.isRequired,
 };
 
 const FeedWithData = connect({
@@ -138,6 +168,7 @@ const FeedWithData = connect({
               open_issues_count
               created_at
               owner {
+                login
                 avatar_url
               }
             }

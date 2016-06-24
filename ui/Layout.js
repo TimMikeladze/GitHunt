@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-apollo';
 import { Link } from 'react-router';
 
-const NavbarLink = ({ title, href, active=false }) => (
+const NavbarLink = ({ title, href, active }) => (
   <li className={active && 'active'}>
     <Link to={href}>
       {title}
@@ -14,6 +14,16 @@ const NavbarLink = ({ title, href, active=false }) => (
     </Link>
   </li>
 );
+
+NavbarLink.defaultProps = {
+  active: false,
+};
+
+NavbarLink.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  href: React.PropTypes.string.isRequired,
+  active: React.PropTypes.bool,
+};
 
 const Profile = ({ data }) => {
   if (data.loading) {
@@ -47,6 +57,10 @@ const Profile = ({ data }) => {
       <a href="/login/github">Log in with GitHub</a>
     </p>
   );
+};
+
+Profile.propTypes = {
+  data: React.PropTypes.object,
 };
 
 const ProfileWithData = connect({
@@ -93,5 +107,11 @@ const Layout = ({ children, params, location }) => (
     </div>
   </div>
 );
+
+Layout.propTypes = {
+  children: React.PropTypes.node,
+  params: React.PropTypes.object,
+  location: React.PropTypes.object,
+};
 
 export default Layout;
