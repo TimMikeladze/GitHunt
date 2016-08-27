@@ -22,7 +22,8 @@ app.use(Express.static(path.join(process.cwd(), 'static')));
 const apiProxy = proxy({ target: apiHost });
 app.use('/graphql', apiProxy);
 app.use('/graphiql', apiProxy);
-app.use('/login', apiProxy);
+app.use('/connect*', apiProxy);
+app.use('/callback*', apiProxy);
 app.use('/logout', apiProxy);
 
 app.use((req, res) => {

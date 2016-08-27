@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
 import gql from 'graphql-tag';
+import Accounts from 'apollo-accounts-client';
 
 function NavbarLink({ title, href, active = false }) {
   return (
@@ -57,7 +58,12 @@ function Profile({ loading, currentUser }) {
   }
   return (
     <p className="navbar-text navbar-right">
-      <a href="/login/github">Log in with GitHub</a>
+      <a
+        href="#"
+        onClick={() => Accounts.loginWithProvider('github')}
+      >
+        Log in with GitHub
+      </a>
     </p>
   );
 }
