@@ -6,7 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 const ReactGA = require('react-ga');
 // Polyfill fetch
 import 'isomorphic-fetch';
-
+import { accountsNetworkInterfaceMiddleware } from 'apollo-accounts-client';
 import routes from './routes.js';
 
 import './style.css';
@@ -19,10 +19,14 @@ function logPageView() {
   ReactGA.pageview(window.location.pathname);
 }
 
+const networkInterface = createNetworkInterface('/graphql', {
+  credentials: 'same-origin',
+});
+
+networkInterface.use([accountsNetworkInterfaceMiddleware]);
+
 const client = new ApolloClient({
-  networkInterface: createNetworkInterface('/graphql', {
-    credentials: 'same-origin',
-  }),
+  networkInterface,
   queryTransformer: addTypename,
   dataIdFromObject: (result) => {
     if (result.id && result.__typename) { // eslint-disable-line no-underscore-dangle
